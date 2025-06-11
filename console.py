@@ -22,7 +22,7 @@ OPTIONS= """**************************************************************
 
 download_path= Path.home() / "Downloads" / "YouTube-Downloader"
 os.mkdir(download_path) if not os.path.exists(download_path) else None
-#add_path.add_ffmpeg_to_path()
+add_path.add_ffmpeg_to_path()
 
 MSG=""
 
