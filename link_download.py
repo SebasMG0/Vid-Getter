@@ -10,6 +10,17 @@ def download_m4a(url:str):
 
     ys = yt.streams.get_audio_only()
     ys.download()
-    print("*"*63)
+    
+    print("\n","*"*63)
 
     return yt.title
+
+def download_serie(serie:list[str]):
+    for url in serie:
+        try:
+            download_m4a(url.strip())
+
+        except Exception as e:
+            print(f"Error al descargar {url}: {e}")
+
+    print("\tSerie de descargas finalizada.")

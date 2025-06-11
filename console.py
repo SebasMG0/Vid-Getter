@@ -1,4 +1,5 @@
 import link_download
+import clipboard_manager
 import os
 
 TITLE= """
@@ -19,6 +20,7 @@ OPTIONS= """**************************************************************
 
 MSG=""
 while True:
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("\n".join([TITLE, OPTIONS]))
 
     try:
@@ -34,9 +36,14 @@ while True:
             
         elif option == 2:
             os.system('cls' if os.name == 'nt' else 'clear')
-            print("-"*63)
+            print("-"*80)
             print("\t¡Empiece a copiar enlaces de YouTube!")
-            print("-"*63)
+            print("\tPresione Ctrl+C dentro de la aplicación para detener el proceso.")
+            print("-"*80)
+
+            serie = clipboard_manager.copy_series()
+            link_download.download_serie(serie)
+            print("_"*63)
             
         elif option == 3:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -50,5 +57,12 @@ while True:
             print("-"*63)
             print("\tOpción no válida, por favor intente de nuevo.")
             print("-"*63)
+
     except ValueError:
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("Entrada no válida, por favor ingrese un valor correcto número.")
+
+    except KeyboardInterrupt:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("\n\n\tSaliendo del programa...")
+        break
