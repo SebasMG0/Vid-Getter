@@ -1,15 +1,17 @@
 import link_download
+import add_path
 import clipboard_manager
 import os
+from pathlib import Path
 
 TITLE= """
 **************************************************************
     
-    ░█▀▄░█░█░█░░░█░░░█▀▀░▀█▀░░░█▀▀░█▀█░█░█░█▀▀░█▀▄
-    ░█▀▄░█░█░█░░░█░░░█▀▀░░█░░░░▀▀█░█▀█░▀▄▀░█▀▀░█▀▄
-    ░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░▀░░░░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀  
+        ░█░█░▀█▀░█▀▄░░░█▀▀░█▀▀░▀█▀░▀█▀░█▀▀░█▀▄
+        ░▀▄▀░░█░░█░█░░░█░█░█▀▀░░█░░░█░░█▀▀░█▀▄
+        ░░▀░░▀▀▀░▀▀░░░░▀▀▀░▀▀▀░░▀░░░▀░░▀▀▀░▀░▀
 
-                                        by: @SebasMG0
+                                            by: @SebasMG0
 **************************************************************"""
 
 OPTIONS= """**************************************************************
@@ -18,18 +20,24 @@ OPTIONS= """**************************************************************
     [3] - Salir
 **************************************************************"""
 
+download_path= Path.home() / "Downloads" / "YouTube-Downloader"
+os.mkdir(download_path) if not os.path.exists(download_path) else None
+#add_path.add_ffmpeg_to_path()
+
 MSG=""
+
+os.system('cls' if os.name == 'nt' else 'clear')
 while True:
-    os.system('cls' if os.name == 'nt' else 'clear')
     print("\n".join([TITLE, OPTIONS]))
 
     try:
-        option = int(input("Seleccione una opción: "))
+        option = int(input("    * Seleccione una opción: "))
+
         if option == 1:
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Pegue el enlace de YouTube:")
 
-            downloaded_title= link_download.download_m4a(input("Enlace: ").strip())
+            link_download.download_m4a(input("Enlace: ").strip(), download_path)
 
             print("\t¡Descarga completada!\n")
             print("_"*63)
@@ -42,7 +50,7 @@ while True:
             print("-"*80)
 
             serie = clipboard_manager.copy_series()
-            link_download.download_serie(serie)
+            link_download.download_serie(serie, download_path)
             print("_"*63)
             
         elif option == 3:
